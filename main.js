@@ -1,25 +1,33 @@
-const { app, BrowserWindow } = require('electron')
+const {app, BrowserWindow, session} = require('electron')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win
+
+let mainWindow
+let vidWindow
 const html = ['./assets/html/index.html']
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
 
   // and load the index.html of the app.
-  win.loadFile(html[0])
+  mainWindow.loadFile(html[0])
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-  win.on('closed', () => {
+  mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    win = null
+    mainWindow = null
   })
 }
 
@@ -27,6 +35,16 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+app.on('ready', function(){
+  vidWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: false
+    }
+  })
+  vidWindow.loadURL('https://www.youtube.com/embed/K4cZWTp-bkw')
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -40,7 +58,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
+  if (mainWindow === null) {
     createWindow()
   }
 })
