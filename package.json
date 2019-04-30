@@ -1,10 +1,10 @@
 {
   "name": "youtube-queue",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Application to handle a youtube queue, similar to how the chromecast queues videos.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Phenipa/youtube-queue/issues"
   },
-  "homepage": "https://github.com/Phenipa/youtube-queue#readme"
+  "homepage": "https://github.com/Phenipa/youtube-queue#readme",
+  "devDependencies": {
+    "electron": "^5.0.0"
+  }
 }
