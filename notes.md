@@ -6,7 +6,7 @@ Embed link format: https://www.youtube.com/embed/[VIDEO_ID]
 The queue should be represented by either, or a combination of, the thumbnail, uploader and title (more?). This could also be made a user option.  
 Thumbnail link format: https://i.ytimg.com/vi/[VIDEO_ID]/hqdefault.jpg
 
-The queue should be parsed in FIFO order, and show a representation which tells the user what video they're about to watch, and/or an amount of videos coming up, in order.
+The queue should be parsed in FIFO (also a spotify-like "play next", which makes that video the next to play, bypassing the ordinary queue) order, and show a representation which tells the user what video they're about to watch, and/or an amount of videos coming up, in order.
 
 HTML5 implements an event listener which calls any function.
 At this point, this is the only way I know which allows for detecting videos ending, and seems ideal.  
