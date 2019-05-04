@@ -1,10 +1,10 @@
 # Notes, thoughts and plans for the project.
 
 When spawning the viewer window, youtube offers multiple links and formats, embed currently favorite.  
-Embed link format: https://www.youtube.com/embed/[VIDEO_ID]
+Embed link format: <https://www.youtube.com/embed/[VIDEO_ID>]
 
 The queue should be represented by either, or a combination of, the thumbnail, uploader and title (more?). This could also be made a user option.  
-Thumbnail link format: https://i.ytimg.com/vi/[VIDEO_ID]/hqdefault.jpg
+Thumbnail link format: <https://i.ytimg.com/vi/[VIDEO_ID]/hqdefault.jpg>
 
 The queue should be parsed in FIFO (also a spotify-like "play next", which makes that video the next to play, bypassing the ordinary queue) order, and show a representation which tells the user what video they're about to watch, and/or an amount of videos coming up, in order.
 
