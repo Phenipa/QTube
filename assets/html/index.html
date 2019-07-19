@@ -7,17 +7,28 @@
   <title>Youtube queuer</title>
 </head>
 
+<script type="text/javascript">
+// include the ipc module to communicate with main process.
+const ipcRenderer = require('electron').ipcRenderer;
+
+function playvid(text) {
+  console.log(text);
+  ipcRenderer.send("playvideo", text); // ipcRender.send will pass the information to main process
+}
+
+</script>
+
 <body>
   <h1>Your queue</h1>
-  We are using node <script>
-    document.write(process.versions.node)
-  </script>,
-  Chrome <script>
-    document.write(process.versions.chrome)
-  </script>,
-  and Electron <script>
-    document.write(process.versions.electron)
-  </script>.
+  <label>Drag and drop video here, or copy-paste link</label> <input type="text" placeholder="Input your video-link, or drag and drop to put it into queue">
+  <table>
+    <tr>
+      <th> <img src="https://i.ytimg.com/vi/PoV_940EB28/0.jpg" style="width:235px" onclick="playvid(this.src)"> </th>
+      <th> <img src="https://i.ytimg.com/vi/mEGowsRofEA/0.jpg" style="width:235px" onclick="playvid(this.src)"> </th>
+      <th> <img src="https://i.ytimg.com/vi/xzkU6tmdImY/0.jpg" style="width:235px" onclick="playvid(this.src)"> </th>
+    </tr>
+  </table>
 </body>
+
 
 </html>
