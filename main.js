@@ -2,15 +2,36 @@ const {app, BrowserWindow, session, ipcMain} = require('electron')
 
 let mainWindow
 let vidWindow
-var dev = true
+var dev = false
 
 function createMainWindow () {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 300,
+    width: 974,
+    height: 390,
     webPreferences: {
       nodeIntegration: true
     }
+  })
+
+  vidWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    show: false,
+    webPreferences: {
+      webSecurity: false,
+      plugins: false,
+      nodeIntegration: true
+    }
+  });
+
+  if (dev) {
+    vidWindow.webContents.openDevTools()
+  }
+
+  vidWindow.loadFile("./assets/html/video.html");
+
+  vidWindow.on('close', function (e){
+    vidWindow = null
   })
 
   mainWindow.loadFile('./assets/html/index.html')
@@ -55,16 +76,6 @@ app.on('activate', () => {
 })
 
 ipcMain.on("playvideo",function (event, arg) {
-  if (vidWindow == null){
-    vidWindow = new BrowserWindow({ width: 800, height: 600, show: false, webPreferences: { webSecurity: false, plugins: true, nodeIntegration: false } });
-    if (dev) {
-      vidWindow.webContents.openDevTools()
-    }
-    vidWindow.loadFile("./assets/html/video.html");
-    vidWindow.on('closed', () => {
-      vidWindow.hide();
-    })
-  }
   videoURL = "https://www.youtube.com/embed/" + arg.split("/")[4];
   console.log(videoURL);
   vidWindow.webContents.send('nextvid', videoURL);
