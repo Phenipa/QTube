@@ -8,13 +8,17 @@
 </head>
 
 <script type="text/javascript">
-// include the ipc module to communicate with main process.
+
 const ipcRenderer = require('electron').ipcRenderer;
 
-function playvid(text) {
-  console.log(text);
-  ipcRenderer.send("playvideo", text); // ipcRender.send will pass the information to main process
+function playvid(src) {
+  console.log(src);
+  ipcRenderer.send("playvideo", src);
 }
+
+ipcRenderer.on('test', function(event, arg) {
+  console.log("test");
+})
 
 </script>
 
