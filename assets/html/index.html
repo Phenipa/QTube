@@ -20,18 +20,38 @@ ipcRenderer.on('test', function(event, arg) {
   console.log("test");
 })
 
+function addVid() {
+  var ul = document.getElementById('queue');
+  var li = document.createElement('li');
+  var item = document.getElementById('add');
+  var img = document.createElement('img');
+  var link = linkValidate(item.value);
+  if (link != false){
+    fullLink = "https://i.ytimg.com/vi/" + link + "/0.jpg"
+    img.setAttribute('src', fullLink);
+    img.setAttribute('onclick', 'playvid(this.src)');
+    img.setAttribute('style', 'width:235px');
+    li.appendChild(img);
+    ul.appendChild(li);
+    item.value = "";
+  }
+}
+
+function linkValidate(url) {
+  var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+  var match = url.match(regExp);
+  console.log(match[7])
+  return (match&&match[7].length==11)? match[7] : false;
+}
+
 </script>
 
 <body>
   <h1>Your queue</h1>
-  <label>Drag and drop video here, or copy-paste link</label> <input type="text" placeholder="Input your video-link, or drag and drop to put it into queue">
-  <table>
-    <tr>
-      <th> <img src="https://i.ytimg.com/vi/PoV_940EB28/0.jpg" style="width:235px" onclick="playvid(this.src)"> </th>
-      <th> <img src="https://i.ytimg.com/vi/mEGowsRofEA/0.jpg" style="width:235px" onclick="playvid(this.src)"> </th>
-      <th> <img src="https://i.ytimg.com/vi/xzkU6tmdImY/0.jpg" style="width:235px" onclick="playvid(this.src)"> </th>
-    </tr>
-  </table>
+  <label>Drag and drop video here, or copy and paste a video link</label> <input type="text" id="add" placeholder="Input your video-link, or drag and drop to put it into queue">
+  <div id=addButton><button onclick="addVid()">Add</button></div>
+  </div>
+  <ul id="queue"></ul>
 </body>
 
 
