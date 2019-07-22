@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 
-const ipcRenderer = require('electron').ipcRenderer;
+const {ipcRenderer, dialog} = require('electron')
 
 function playvid(src) {
   console.log(src);
@@ -21,12 +21,12 @@ ipcRenderer.on('test', function(event, arg) {
 })
 
 function addVid() {
-  var ul = document.getElementById('queue');
-  var li = document.createElement('li');
   var item = document.getElementById('add');
-  var img = document.createElement('img');
   var link = linkValidate(item.value);
   if (link != false){
+    var ul = document.getElementById('queue');
+    var li = document.createElement('li');
+    var img = document.createElement('img');
     fullLink = "https://i.ytimg.com/vi/" + link + "/0.jpg"
     img.setAttribute('src', fullLink);
     img.setAttribute('onclick', 'playvid(this.src)');
@@ -34,13 +34,15 @@ function addVid() {
     li.appendChild(img);
     ul.appendChild(li);
     item.value = "";
+  } else {
+    alert("Invalid link.");
+    item.value = "";
   }
 }
 
 function linkValidate(url) {
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
   var match = url.match(regExp);
-  console.log(match[7])
   return (match&&match[7].length==11)? match[7] : false;
 }
 

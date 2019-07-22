@@ -19,7 +19,7 @@ function createMainWindow () {
     show: false,
     webPreferences: {
       webSecurity: false,
-      plugins: false,
+      plugins: true,
       nodeIntegration: true
     }
   });
