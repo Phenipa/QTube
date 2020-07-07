@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Phenipa/youtube-queue#readme",
   "devDependencies": {
-    "electron": "^5.0.0"
+    "electron": "^9.1.0"
   },
   "dependencies": {
     "electron-packager": "^13.1.1"
